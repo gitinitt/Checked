@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Breach Simulation</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: #000;
+            color: #0f0;
+            font-family: 'Courier New', monospace;
+            overflow: hidden;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .glitch {
+            font-size: 3em;
+            text-transform: uppercase;
+            position: relative;
+            animation: glitch 1s linear infinite;
+        }
+        @keyframes glitch {
+            2%, 64% {
+                transform: translate(2px,0) skew(0deg);
+            }
+            4%, 60% {
+                transform: translate(-2px,0) skew(0deg);
+            }
+            62% {
+                transform: translate(0,0) skew(5deg); 
+            }
+        }
+        .glitch:before,
+        .glitch:after {
+            content: attr(title);
+            position: absolute;
+            left: 0;
+        }
+        .glitch:before {
+            animation: glitchTop 1s linear infinite;
+            clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+            -webkit-clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+        }
+        @keyframes glitchTop {
+            2%, 64% {
+                transform: translate(2px,-2px);
+            }
+            4%, 60% {
+                transform: translate(-2px,2px);
+            }
+            62% {
+                transform: translate(13px,-1px) skew(-13deg); 
+            }
+        }
+        .glitch:after {
+            animation: glitchBottom 1.5s linear infinite;
+            clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+            -webkit-clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+        }
+        @keyframes glitchBottom {
+            2%, 64% {
+                transform: translate(-2px,0);
+            }
+            4%, 60% {
+                transform: translate(-2px,0);
+            }
+            62% {
+                transform: translate(-22px,5px) skew(21deg); 
+            }
+        }
+        .console {
+            flex-grow: 1;
+            background-color: rgba(0, 30, 0, 0.5);
+            border: 1px solid #0f0;
+            padding: 10px;
+            overflow-y: auto;
+            font-size: 14px;
+        }
+        .blink {
+            animation: blink 0.7s infinite;
+        }
+        @keyframes blink {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="glitch" title="System Breach">System Breach</h1>
+        </div>
+        <div class="console" id="console">
+            > Initiating system breach...<br>
+            > Bypassing firewall...<br>
+            > Accessing main frame...<br>
+            > Downloading sensitive data...<br>
+            > Erasing tracks...<br>
+            > <span class="blink">_</span>
+        </div>
+        <div class="footer">
+            Alamat IP Kamu Sudah Tersimpan Didatabase 
+        </div>
+    </div>
+
+    <script>
+        const consoleElement = document.getElementById('console');
+        const messages = [
+            "Injecting malicious code...",
+            "Corrupting system files...",
+            "Bypassing encryption...",
+            "Stealing user credentials...",
+            "Installing backdoor...",
+            "Activating remote access...",
+            "Hijacking network traffic...",
+            "Deploying ransomware payload...",
+            "System compromised. Full access granted."
+        ];
+
+        let index = 0;
+
+        function addMessage() {
+            if (index < messages.length) {
+                consoleElement.innerHTML += `> ${messages[index]}<br>`;
+                consoleElement.innerHTML += `> <span class="blink">_</span>`;
+                consoleElement.scrollTop = consoleElement.scrollHeight;
+                index++;
+                setTimeout(addMessage, Math.random() * 1000 + 500);
+            }
+        }
+
+        setTimeout(addMessage, 1000);
+    </script>
+</body>
+</html>
